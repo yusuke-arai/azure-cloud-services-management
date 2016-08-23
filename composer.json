@@ -1,0 +1,19 @@
+{
+    "name": "zamec75/azure-cloud-service-management",
+    "type": "library",
+    "require": {
+        "php": ">=5.3",
+        "microsoft/windowsazure": "^0.4.4"
+    },
+    "authors": [
+        {
+            "name": "Yusuke Arai",
+            "email": "arai@zamec.org"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "CloudServicesManagement\\": "src/"
+        }
+    }
+}
