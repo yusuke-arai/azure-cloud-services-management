@@ -10,7 +10,7 @@ Features are:
 
 ## Install
 ```
-git clone git@github.com:zamec75/azure-cloud-services-management.git
+git clone git@github.com:yusuke-arai/azure-cloud-services-management.git
 cd azure-cloud-services-management
 composer install
 ```

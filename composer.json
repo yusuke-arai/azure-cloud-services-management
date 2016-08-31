@@ -1,5 +1,5 @@
 {
-    "name": "zamec75/azure-cloud-service-management",
+    "name": "yusuke-arai/azure-cloud-service-management",
     "type": "library",
     "require": {
         "php": ">=5.3",
