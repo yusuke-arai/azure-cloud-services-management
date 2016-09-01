@@ -5,12 +5,12 @@ Features are:
 * Re-image all instances of a cloud service.
 
 ## Requirement
-* PHP 5.3 or above
+* PHP 5.5 or above
 * Composer
 
 ## Install
 ```
-git clone git@github.com:yusuke-arai/azure-cloud-services-management.git
+git clone https://github.com/yusuke-arai/azure-cloud-services-management.git
 cd azure-cloud-services-management
 composer install
 ```
