@@ -110,7 +110,7 @@ class CloudServiceManager
         $try = 0;
         do {
             sleep(30);
-            if ($try++ >= 20) {
+            if ($try++ >= 40) { // 20 minutes timeout.
                 throw new TimeoutException('Timeout.');
             }
 
