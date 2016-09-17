@@ -36,10 +36,11 @@ class CloudServiceManager
 
     /**
      * Re-image all instances of a cloud service.
-     * @param string $serviceName
-     * @param string $slot
+     * @param string $serviceName Cloud Service name.
+     * @param string $slot Deployment slot.
+     * @param bool $sync if true, re-image one by one. if not, simultaneously.
      */
-    public function reImage($serviceName, $slot = DeploymentSlot::PRODUCTION)
+    public function reImage($serviceName, $slot = DeploymentSlot::PRODUCTION, $sync = true)
     {
         // Get deployment information.
         $options = new GetDeploymentOptions();
@@ -47,18 +48,35 @@ class CloudServiceManager
         $deploy = $this->proxy->getDeployment($serviceName, $options);
 
         // Re-image each instance.
-        foreach ($deploy->getDeployment()->getRoleInstanceList() as $instance) {
-            /**
-             * @var $instance RoleInstance
-             */
-            $date = date('Y-m-d H:i:s');
-            echo "Start to re-image {$instance->getInstanceName()} at {$date}\n";
-            $this->proxy->reimageRoleInstance($serviceName, $instance->getInstanceName(), $options);
+        if ($sync) {
+            foreach ($deploy->getDeployment()->getRoleInstanceList() as $instance) {
+                /**
+                 * @var $instance RoleInstance
+                 */
+                $date = date('Y-m-d H:i:s');
+                echo "Start to re-image {$instance->getInstanceName()} at {$date}\n";
+                $this->proxy->reimageRoleInstance($serviceName, $instance->getInstanceName(), $options);
 
-            // Wait for start re-imaging.
-            $this->waitFor($this->proxy, $serviceName, $options, $instance->getInstanceName(), false);
-            // Wait for re-imaging completes.
-            $this->waitFor($this->proxy, $serviceName, $options, $instance->getInstanceName(), true);
+                // Wait for start re-imaging.
+                $this->waitFor($this->proxy, $serviceName, $options, $instance->getInstanceName(), false);
+                // Wait for re-imaging completes.
+                $this->waitFor($this->proxy, $serviceName, $options, $instance->getInstanceName(), true);
+            }
+        } else {
+            $date = date('Y-m-d H:i:s');
+            echo "Start to re-image at {$date}\n";
+            foreach ($deploy->getDeployment()->getRoleInstanceList() as $instance) {
+                /**
+                 * @var $instance RoleInstance
+                 */
+                $this->proxy->reimageRoleInstance($serviceName, $instance->getInstanceName(), $options);
+            }
+
+            echo "Waiting for start re-imaging.\n";
+            $this->waitForAny($this->proxy, $serviceName, $options, false);
+
+            echo "Waiting for complete re-imaging.\n";
+            $this->waitForAll($this->proxy, $serviceName, $options, true);
         }
         $date = date('Y-m-d H:i:s');
         echo "Done at {$date}.\n";
@@ -129,5 +147,74 @@ class CloudServiceManager
              */
             $instanceStatus = $instancesStatus[0];
         } while (($instanceStatus->getInstanceStatus() === 'ReadyRole') !== $forReady);
+    }
+
+    /**
+     * Wait for any instance get ready or not.
+     * @param ServiceManagementRestProxy $proxy
+     * @param string $serviceName Name of cloud service.
+     * @param GetDeploymentOptions $getDeploymentOptions
+     * @param bool $forReady if true, wait for any instance get ready, else not ready.
+     * @throws TimeoutException
+     * @throws UnknownException
+     */
+    private function waitForAny($proxy, $serviceName, $getDeploymentOptions, $forReady)
+    {
+        $try = 0;
+        do {
+            sleep(30);
+            if ($try++ >= 40) { // 20 minutes timeout.
+                throw new TimeoutException('Timeout.');
+            }
+
+            $instanceList = $proxy->getDeployment($serviceName, $getDeploymentOptions)->getDeployment()->getRoleInstanceList();
+            if (empty($instanceList)) {
+                throw new UnknownException('Instance is not found.');
+            }
+
+            foreach ($instanceList as $instance) {
+                /**
+                 * @var $instance RoleInstance
+                 */
+                if (($instance->getInstanceStatus() === 'ReadyRole') === $forReady) {
+                    break 2;
+                }
+            }
+        } while (true);
+    }
+
+    /**
+     * Wait for all instance get ready or not.
+     * @param ServiceManagementRestProxy $proxy
+     * @param string $serviceName Name of cloud service.
+     * @param GetDeploymentOptions $getDeploymentOptions
+     * @param bool $forReady if true, wait for all instances get ready, else not ready.
+     * @throws TimeoutException
+     * @throws UnknownException
+     */
+    private function waitForAll($proxy, $serviceName, $getDeploymentOptions, $forReady)
+    {
+        $try = 0;
+        do {
+            sleep(30);
+            if ($try++ >= 40) { // 20 minutes timeout.
+                throw new TimeoutException('Timeout.');
+            }
+
+            $instanceList = $proxy->getDeployment($serviceName, $getDeploymentOptions)->getDeployment()->getRoleInstanceList();
+            if (empty($instanceList)) {
+                throw new UnknownException('Instance is not found.');
+            }
+
+            $conditionsOfEach = array_map(function ($instance) use ($forReady) {
+                /**
+                 * @var $instance RoleInstance
+                 */
+                return ($instance->getInstanceStatus() === 'ReadyRole') === $forReady;
+            }, $instanceList);
+            $condition = array_reduce($conditionsOfEach, function ($x, $y) {
+                return $x && $y;
+            }, true);
+        } while (!$condition);
     }
 }
