@@ -139,12 +139,12 @@ class CloudServiceManager
             }
 
             $instanceList = $proxy->getDeployment($serviceName, $getDeploymentOptions)->getDeployment()->getRoleInstanceList();
-            $instancesStatus = array_filter($instanceList, function ($x) use ($instanceName) {
+            $instancesStatus = array_values(array_filter($instanceList, function ($x) use ($instanceName) {
                 /**
                  * @var $x RoleInstance
                  */
                 return $x->getInstanceName() === $instanceName;
-            });
+            }));
             if (empty($instancesStatus[0])) {
                 throw new UnknownException('Instance is not found.');
             }
