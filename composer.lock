@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9668f11452eeca8051ce3c0c83542576",
-    "content-hash": "5a0009c048c18da57534722dc998a273",
+    "hash": "23191b8da606b1770d9818a6a0caedba",
+    "content-hash": "6935406caf772572ac88975d5552a7ff",
     "packages": [
         {
             "name": "firebase/php-jwt",
-            "version": "v3.0.0",
+            "version": "v4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "fa8a06e96526eb7c0eeaa47e4f39be59d21f16e1"
+                "reference": "dccf163dc8ed7ed6a00afc06c51ee5186a428d35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/fa8a06e96526eb7c0eeaa47e4f39be59d21f16e1",
-                "reference": "fa8a06e96526eb7c0eeaa47e4f39be59d21f16e1",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/dccf163dc8ed7ed6a00afc06c51ee5186a428d35",
+                "reference": "dccf163dc8ed7ed6a00afc06c51ee5186a428d35",
                 "shasum": ""
             },
             "require": {
@@ -48,20 +48,20 @@
             ],
             "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
             "homepage": "https://github.com/firebase/php-jwt",
-            "time": "2015-07-22 18:31:08"
+            "time": "2016-07-18 04:51:16"
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.2.1",
+            "version": "6.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "3f808fba627f2c5b69e2501217bf31af349c1427"
+                "reference": "ebf29dee597f02f09f4d5bbecc68230ea9b08f60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/3f808fba627f2c5b69e2501217bf31af349c1427",
-                "reference": "3f808fba627f2c5b69e2501217bf31af349c1427",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/ebf29dee597f02f09f4d5bbecc68230ea9b08f60",
+                "reference": "ebf29dee597f02f09f4d5bbecc68230ea9b08f60",
                 "shasum": ""
             },
             "require": {
@@ -110,32 +110,32 @@
                 "rest",
                 "web service"
             ],
-            "time": "2016-07-15 17:22:37"
+            "time": "2016-10-08 15:01:37"
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "1.2.0",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "c10d860e2a9595f8883527fa0021c7da9e65f579"
+                "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/c10d860e2a9595f8883527fa0021c7da9e65f579",
-                "reference": "c10d860e2a9595f8883527fa0021c7da9e65f579",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/a59da6cf61d80060647ff4d3eb2c03a2bc694646",
+                "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "^4.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -161,7 +161,7 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2016-05-18 16:56:05"
+            "time": "2016-12-20 10:07:11"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -223,16 +223,16 @@
         },
         {
             "name": "microsoft/azure-storage",
-            "version": "v0.10.1",
+            "version": "v0.10.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Azure/azure-storage-php.git",
-                "reference": "eadb0378df6e649b1e598a7e5b5fd1ae445f11b7"
+                "reference": "27de05b00c1858d6e1c6adbc489efa90e0342f82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Azure/azure-storage-php/zipball/eadb0378df6e649b1e598a7e5b5fd1ae445f11b7",
-                "reference": "eadb0378df6e649b1e598a7e5b5fd1ae445f11b7",
+                "url": "https://api.github.com/repos/Azure/azure-storage-php/zipball/27de05b00c1858d6e1c6adbc489efa90e0342f82",
+                "reference": "27de05b00c1858d6e1c6adbc489efa90e0342f82",
                 "shasum": ""
             },
             "require": {
@@ -277,24 +277,24 @@
                 "sdk",
                 "storage"
             ],
-            "time": "2016-05-12 07:55:05"
+            "time": "2016-08-19 08:32:57"
         },
         {
             "name": "microsoft/windowsazure",
-            "version": "v0.4.4",
+            "version": "v0.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Azure/azure-sdk-for-php.git",
-                "reference": "8ce9ca6ee3018d1134b5babdf9ea05b163e668d0"
+                "reference": "4302dfd630b577e58d97e23b13b1cf37b6477eb1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Azure/azure-sdk-for-php/zipball/8ce9ca6ee3018d1134b5babdf9ea05b163e668d0",
-                "reference": "8ce9ca6ee3018d1134b5babdf9ea05b163e668d0",
+                "url": "https://api.github.com/repos/Azure/azure-sdk-for-php/zipball/4302dfd630b577e58d97e23b13b1cf37b6477eb1",
+                "reference": "4302dfd630b577e58d97e23b13b1cf37b6477eb1",
                 "shasum": ""
             },
             "require": {
-                "firebase/php-jwt": "^3.0",
+                "firebase/php-jwt": "^4.0",
                 "microsoft/azure-storage": "^0.10",
                 "pear/http_request2": "^2.3",
                 "pear/mail_mime": "^1.10",
@@ -303,7 +303,7 @@
                 "php": ">=5.5"
             },
             "require-dev": {
-                "fabpot/php-cs-fixer": "^1.11",
+                "friendsofphp/php-cs-fixer": "^1.11",
                 "mayflower/php-codebrowser": "^1.1",
                 "mikey179/vfsstream": "^1.6",
                 "pdepend/pdepend": "^2.2",
@@ -341,7 +341,7 @@
                 "php",
                 "sdk"
             ],
-            "time": "2016-08-15 18:08:43"
+            "time": "2016-09-26 21:33:08"
         },
         {
             "name": "pear/console_getopt",
@@ -760,6 +760,8 @@
     "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
+    "platform": {
+        "php": ">=5.5"
+    },
     "platform-dev": []
 }

@@ -83,24 +83,30 @@ class CloudServiceManager
     }
 
     /**
-     * Reboot all instances of a cloud service.
+     * Reboot one or all instances of a cloud service.
      * @param string $serviceName
      * @param string $slot
+     * @param string $targetInstance Name of target instance.
      */
-    public function reboot($serviceName, $slot = DeploymentSlot::PRODUCTION)
+    public function reboot($serviceName, $slot = DeploymentSlot::PRODUCTION, $targetRole = '')
     {
         // Get deployment information.
         $options = new GetDeploymentOptions();
         $options->setSlot($slot);
         $deploy = $this->proxy->getDeployment($serviceName, $options);
 
-        // Re-image each instance.
+        // Reboot instances.
         foreach ($deploy->getDeployment()->getRoleInstanceList() as $instance) {
+            // Skip if not target.
+            if (!empty($targetRole) && $instance->getInstanceName() !== $targetRole) {
+                continue;
+            }
+
             /**
              * @var $instance RoleInstance
              */
             $date = date('Y-m-d H:i:s');
-            echo "Start to re-image {$instance->getInstanceName()} at {$date}\n";
+            echo "Start to reboot {$instance->getInstanceName()} at {$date}\n";
             $this->proxy->rebootRoleInstance($serviceName, $instance->getInstanceName(), $options);
 
             // Wait for start reboot.

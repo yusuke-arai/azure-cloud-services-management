@@ -18,7 +18,7 @@ composer install
 ## How to use
 ### Reboot
 ```
-bin/reboot.php <subscription-id> <certificate-filepath> <service-name>
+bin/reboot.php <subscription-id> <certificate-filepath> <service-name> [<instance-name>]
 ```
 
 ### Re-image
